@@ -1,0 +1,196 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CiudadData API",
+    "version": "1.0.0",
+    "description": "Documentación de endpoints de CiudadData"
+  },
+  "servers": [
+    { "url": "http://localhost:3000" }
+  ],
+  "paths": {
+    "/geo/city/{city}": {
+      "get": {
+        "summary": "Obtener información de una ciudad",
+        "parameters": [
+          {
+            "name": "city",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }, 
+            "example": "Caracas"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Información de la ciudad"
+          }
+        }
+      }
+    },
+    "/geo/population/{country}": {
+      "get": {
+        "summary": "Obtener población de un país",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }, 
+            "example": "VE"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Datos de población"
+          }
+        }
+      }
+    },
+    "/geo/report": {
+      "post": {
+        "summary": "Crear reporte ciudadano",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": { "type": "string" },
+                  "description": { "type": "string" },
+                  "city": { "type": "string" },
+                  "location": {
+                    "type": "object",
+                    "properties": {
+                      "lat": { "type": "number" },
+                      "lon": { "type": "number" }
+                    }
+                  }
+                },
+                "example": { 
+                    "type": "bache", 
+                    "description": "Hueco en la calle principal frente a la plaza", 
+                    "city": "Caracas", 
+                    "location": { "lat": 10.491, "lon": -66.882 } 
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Reporte creado"
+          }
+        }
+      }
+    },
+    "/transit/routes/{city}": {
+      "get": {
+        "summary": "Obtener rutas de transporte por ciudad",
+        "parameters": [
+          {
+            "name": "city",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }, 
+            "example": "caracas"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listado de rutas"
+          }
+        }
+      }
+    },
+    "/transit/eta": {
+      "get": {
+        "summary": "Obtener ETA en una parada",
+        "parameters": [
+          {
+            "name": "stop_id",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "490008660N"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tiempo estimado de llegada"
+          }
+        }
+      }
+    },
+    "/transit/incident": {
+      "post": {
+        "summary": "Reportar incidente de transporte",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "line": { "type": "string" },
+                  "city": { "type": "string" },
+                  "description": { "type": "string" }
+                },
+                "example": { 
+                    "line": "metro-a", 
+                    "city": "Caracas", 
+                    "description": "Retraso por mantenimiento en la línea A" 
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Incidente registrado"
+          }
+        }
+      }
+    },
+    "/health/life-expectancy/{country}": {
+      "get": {
+        "summary": "Esperanza de vida al nacer por país",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "USA"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Datos de esperanza de vida"
+          }
+        }
+      }
+    },
+    "/health/infant-mortality/{country}": {
+      "get": {
+        "summary": "Tasa de mortalidad infantil por país",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "USA"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Datos de mortalidad infantil por cada 1000 bebés menores de 1 año"
+          }
+        }
+      }
+    }
+
+  }
+}
