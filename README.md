@@ -14,6 +14,12 @@ npm install mongoose
 # Axios para llamadas HTTP
 npm install axios
 
+# Jest y pruebas con TypeScript/ESM
+npm install --save-dev jest ts-jest @types/jest
+
+# Supertest para pruebas de endpoints HTTP
+npm install --save-dev supertest @types/supertest
+
 # Swagger para documentación
 npm install swagger-ui-express
 

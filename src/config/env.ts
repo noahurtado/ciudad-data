@@ -10,10 +10,6 @@ const EnvSchema = z.object({
   CACHE_TTL_SECONDS: z.string().default('300')
 });
 
-const parsed = EnvSchema.safeParse(process.env);
-if (!parsed.success) {
-  console.error('Invalid env:', parsed.error.flatten());
-  process.exit(1);
-}
-export const env = parsed.data;
+export const env = EnvSchema.parse(process.env);
+
 export const CACHE_TTL = parseInt(env.CACHE_TTL_SECONDS, 10);

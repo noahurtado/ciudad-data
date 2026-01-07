@@ -16,7 +16,7 @@ export async function getLifeExpectancy(countryCode: string) {
   const latest = data.value.sort((a: any, b: any) => b.TimeDim - a.TimeDim)[0];
 
   return {
-    indicator: latest.IndicatorName,
+    indicator: latest.IndicatorName || latest.IndicatorCode || 'Life Expectancy',
     country: latest.SpatialDim,
     year: latest.TimeDim,
     value: latest.Value
